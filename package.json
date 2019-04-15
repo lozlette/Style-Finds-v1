@@ -1,4 +1,7 @@
-{
+{ "name": "flask-react-setup",
+  "version": "1.0.0",
+  "main": "index.js",
+  "license": "MIT",
   "scripts": {
     "test": "mocha --require test/spec_helper --require ignore-styles test/**/*_spec.js --recursive --exit",
     "serve:react": "webpack-dev-server",
@@ -14,6 +17,7 @@
     "babel-loader": "^8.0.5",
     "bulma": "^0.7.4",
     "css-loader": "^2.1.1",
+    "flask": "^0.2.10",
     "html-webpack-plugin": "^3.2.0",
     "moment": "^2.24.0",
     "node-sass": "^4.11.0",

@@ -2419,6 +2419,11 @@ findup-sync@^2.0.0:
     micromatch "^3.0.4"
     resolve-dir "^1.0.1"
 
+flask@^0.2.10:
+  version "0.2.10"
+  resolved "https://registry.yarnpkg.com/flask/-/flask-0.2.10.tgz#f5f5a42cfd58a309e37c67c0a39617a819e5e1b7"
+  integrity sha1-9fWkLP1YownjfGfAo5YXqBnl4bc=
+
 flush-write-stream@^1.0.0:
   version "1.1.1"
   resolved "https://registry.yarnpkg.com/flush-write-stream/-/flush-write-stream-1.1.1.tgz#8dd7d873a1babc207d94ead0c2e0e44276ebf2e8"
