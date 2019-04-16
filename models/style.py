@@ -8,7 +8,7 @@ class Style(db.Model):
     image_url = db.Column(db.String(180), nullable=False)
     shop_logo_img_url = db.Column(db.String(180), nullable=False)
     price = db.Column(db.String(20), nullable=False)
-    description = db.Column(db.String(250), nullable=False)
+    description = db.Column(db.String(1000), nullable=False)
 
 
 class StyleSchema(ma.ModelSchema):
