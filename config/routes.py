@@ -1,11 +1,12 @@
 import os
 from app import app
-from controllers import users, auth, finds, styles
+from controllers import users, auth, styles, finds
 
 app.register_blueprint(users.api, url_prefix='/api')
 app.register_blueprint(auth.api, url_prefix='/api')
-app.register_blueprint(finds.api, url_prefix='/api')
 app.register_blueprint(styles.api, url_prefix='/api')
+app.register_blueprint(finds.api, url_prefix='/api')
+
 
 @app.route('/', defaults={'path': ''}) # homepage
 @app.route('/<path:path>') # any other path

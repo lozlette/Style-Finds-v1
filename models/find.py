@@ -13,9 +13,10 @@ class Find(db.Model, BaseModel):
     description = db.Column(db.String(1000), nullable=False)
 
 
+
 class FindSchema(ma.ModelSchema, BaseSchema):
 
-    styles = fields.Nested('StyleSchema', exclude='finds')
+    styles = fields.Nested('StyleSchema', exclude=('finds',), many=True)
 
     class Meta:
         model = Find

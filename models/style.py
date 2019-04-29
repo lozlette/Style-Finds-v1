@@ -19,13 +19,13 @@ class Style(db.Model, BaseModel):
     price = db.Column(db.String(20), nullable=False)
     description = db.Column(db.String(1000), nullable=False)
     finds = db.relationship('Find', backref='styles', secondary='finds_styles', uselist=True)
-    find_id = db.Column(db.Integer, db.ForeignKey('finds.id'))
+    find_id = db.Column(db.Integer, db.ForeignKey('finds.id',))
 
 
 
 class StyleSchema(ma.ModelSchema, BaseSchema):
 
-    finds = fields.Nested('FindSchema', exclude='styles', many=True)
+    finds = fields.Nested('FindSchema', exclude=('styles',), many=True)
 
     class Meta:
         model = Style
