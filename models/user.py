@@ -12,8 +12,8 @@ class User(db.Model, BaseModel):
     __tablename__ = 'users'
 
     username = db.Column(db.String(80), nullable=False)
-    name = db.Column(db.String(100))
-    image_url = db.Column(db.String(180))
+    name = db.Column(db.String(100), nullable=False)
+    image_url = db.Column(db.String(180), nullable=False)
     bio = db.Column(db.String(250), nullable=False)
     email = db.Column(db.String(180), nullable=False)
     password_hash = db.Column(db.String(128), nullable=True)
@@ -94,6 +94,8 @@ class UserSchema(ma.ModelSchema, BaseSchema):
         error='A Password Confirmation is required'
         )],
     )
+
+    created_styles = fields.Nested('StyleSchema', many=True)
 
 
     class Meta:

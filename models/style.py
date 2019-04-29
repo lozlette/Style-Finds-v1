@@ -20,12 +20,17 @@ class Style(db.Model, BaseModel):
     description = db.Column(db.String(1000), nullable=False)
     finds = db.relationship('Find', backref='styles', secondary='finds_styles', uselist=True)
     find_id = db.Column(db.Integer, db.ForeignKey('finds.id',))
+    creator_id = db.Column(db.Integer, db.ForeignKey('users.id'))
+    creator = db.relationship('User', backref='created_styles')
 
 
 
 class StyleSchema(ma.ModelSchema, BaseSchema):
 
     finds = fields.Nested('FindSchema', exclude=('styles',), many=True)
+    creator = fields.Nested('UserSchema', only=('id', 'username', 'image_url'))
+
+
 
     class Meta:
         model = Style
