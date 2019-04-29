@@ -1,5 +1,7 @@
 from flask import Blueprint, request, jsonify, g
 from models.style import Style, StyleSchema
+from lib.secure_route import secure_route
+
 
 api = Blueprint('styles', __name__)
 
@@ -16,4 +18,18 @@ def index():
 # @secure_route
 def show(style_id):
     style = Style.query.get(style_id)
+    return style_schema.jsonify(style)
+
+
+@api.route('/styles', methods=['POST'])
+@secure_route
+def create():
+    style, errors = style_schema.load(request.get_json())
+    style.creator = g.current_user
+
+    if errors:
+        return jsonify(errors), 422
+
+    style.save()
+
     return style_schema.jsonify(style)

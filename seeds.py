@@ -7,6 +7,7 @@ with app.app_context():
     db.drop_all()
     db.create_all()
 
+
 #Finds
 colletta_printed_dress = Find(
 image_url='https://media.frenchconnection.com/ms/fcuk/71lik-womens-cr-brightflamemulti-coletta-printed-dress.jpg?404=fcuk/71lik.jpg&width=425&height=637',
