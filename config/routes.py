@@ -1,8 +1,9 @@
 import os
 from app import app
-from controllers import finds, styles
+from controllers import users, auth, finds, styles
 
-# app.register_blueprint(users.api, url_prefix='/api')
+app.register_blueprint(users.api, url_prefix='/api')
+app.register_blueprint(auth.api, url_prefix='/api')
 app.register_blueprint(finds.api, url_prefix='/api')
 app.register_blueprint(styles.api, url_prefix='/api')
 

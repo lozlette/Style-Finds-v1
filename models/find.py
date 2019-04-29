@@ -1,17 +1,17 @@
 from app import db, ma
+from .base import BaseModel, BaseSchema
 
-class Find(db.Model):
+class Find(db.Model, BaseModel):
 
     __tablename__ = 'finds'
 
-    id = db.Column(db.Integer, primary_key=True)
     image_url = db.Column(db.String(180), nullable=False)
     shop_logo_img_url = db.Column(db.String(180), nullable=False)
     price = db.Column(db.String(20), nullable=False)
     description = db.Column(db.String(1000), nullable=False)
 
 
-class FindSchema(ma.ModelSchema):
+class FindSchema(ma.ModelSchema, BaseSchema):
 
     class Meta:
         model = Find
