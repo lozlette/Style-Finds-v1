@@ -1,6 +1,8 @@
 from app import db, ma
 from marshmallow import fields
 from .base import BaseModel, BaseSchema
+from marshmallow_sqlalchemy import SQLAlchemySchema
+from marshmallow_sqlalchemy.fields import Nested
 
 
 class Find(db.Model, BaseModel):
@@ -14,7 +16,7 @@ class Find(db.Model, BaseModel):
 
 
 
-class FindSchema(ma.ModelSchema, BaseSchema):
+class FindSchema(ma.SQLAlchemySchema, BaseSchema):
 
     styles = fields.Nested('StyleSchema', exclude=('finds',), many=True)
 

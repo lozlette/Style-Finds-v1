@@ -2,6 +2,7 @@ from flask import Blueprint, request, g, jsonify
 from models.user import User, UserSchema
 from lib.secure_route import secure_route
 
+
 api = Blueprint('users', __name__)
 
 users_schema = UserSchema(many=True)
