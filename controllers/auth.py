@@ -9,12 +9,12 @@ user_schema = UserSchema()
 @api.route('/register', methods=['POST'])
 def register():
 
-    user, errors = user_schema.load(request.get_json())
+    user, errors = (user_schema.load(request.get_json()),'')
 
     if errors:
         return jsonify(errors), 422
 
-    user.save()
+    user.update()
 
     return jsonify({'message': 'Registration successful'}), 201
 
