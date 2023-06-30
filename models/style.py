@@ -2,6 +2,8 @@ from app import db, ma
 from marshmallow import fields
 from .find import Find, FindSchema
 from .base import BaseModel, BaseSchema
+from marshmallow_sqlalchemy import SQLAlchemySchema
+from marshmallow_sqlalchemy.fields import Nested
 
 
 finds_styles = db.Table(
@@ -25,7 +27,7 @@ class Style(db.Model, BaseModel):
 
 
 
-class StyleSchema(ma.ModelSchema, BaseSchema):
+class StyleSchema(ma.SQLAlchemySchema, BaseSchema):
 
     finds = fields.Nested('FindSchema', exclude=('styles',), many=True)
     creator = fields.Nested('UserSchema', only=('id', 'username', 'image_url'))
