@@ -3,8 +3,10 @@ import jwt
 from config.environment import secret
 from app import db, ma, bcrypt
 from sqlalchemy.ext.hybrid import hybrid_property
-from marshmallow import validates_schema, ValidationError, validate, fields
+from marshmallow import validates_schema, ValidationError, validate, fields, INCLUDE
 from .base import BaseModel, BaseSchema
+from marshmallow_sqlalchemy import SQLAlchemySchema
+from marshmallow_sqlalchemy.fields import Nested
 
 
 class User(db.Model, BaseModel):
@@ -16,7 +18,7 @@ class User(db.Model, BaseModel):
     image_url = db.Column(db.String(180), nullable=False)
     bio = db.Column(db.String(250), nullable=False)
     email = db.Column(db.String(180), nullable=False)
-    password_hash = db.Column(db.String(128), nullable=True)
+    password_hash = db.Column(db.String(128), nullable=False)
 
     @hybrid_property
     def password(self):
@@ -47,11 +49,11 @@ class User(db.Model, BaseModel):
 
 
 
-class UserSchema(ma.ModelSchema, BaseSchema):
+class UserSchema(ma.SQLAlchemySchema, BaseSchema):
 
     @validates_schema
     # pylint: disable=R0201
-    def check_passwords_match(self, data):
+    def check_passwords_match(self, data, **kwargs):
         if data.get('password') != data.get('password_confirmation'):
             raise ValidationError(
                 'Password is needed',
@@ -64,6 +66,7 @@ class UserSchema(ma.ModelSchema, BaseSchema):
             min=1,
             max=50,
             error='A Username is required'
+
         )],
     )
 
@@ -95,10 +98,12 @@ class UserSchema(ma.ModelSchema, BaseSchema):
         )],
     )
 
+
     created_styles = fields.Nested('StyleSchema', many=True)
 
 
     class Meta:
         model = User
-        exclude = ('password_hash',)
+        unknown = INCLUDE
+        # exclude = ('password_hash',)
         load_only = ('password', 'password_confirmation')
